@@ -1,0 +1,20 @@
+
+import java.util.*;
+
+public class SubarraySumEqualsK {
+    public static int subarraySum(int[] nums, int k) {
+        Map<Integer,Integer> prefCount = new HashMap<>();
+        prefCount.put(0,1);
+        int sum = 0, count = 0;
+        for (int n : nums) {
+            sum += n;
+            if (prefCount.containsKey(sum - k)) count += prefCount.get(sum - k);
+            prefCount.put(sum, prefCount.getOrDefault(sum,0) + 1);
+        }
+        return count;
+    }
+    public static void main(String[] args) {
+        int[] a = {1,1,1};
+        System.out.println(subarraySum(a, 2)); // 2
+    }
+}
