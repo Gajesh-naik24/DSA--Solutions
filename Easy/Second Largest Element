@@ -13,7 +13,6 @@ public class SecondLargest {
                 secondMax = num;
             }
         }
-
         System.out.println("Second Largest = " + secondMax);
     }
 }
