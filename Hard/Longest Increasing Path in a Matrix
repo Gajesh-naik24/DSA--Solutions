@@ -1,0 +1,31 @@
+class Solution {
+    int[][] dir = {{1,0},{-1,0},{0,1},{0,-1}};
+    int n,m;
+    int[][] dp;
+
+    public int longestIncreasingPath(int[][] mat) {
+        n = mat.length; m = mat[0].length;
+        dp = new int[n][m];
+
+        int ans = 0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                ans = Math.max(ans, dfs(mat,i,j));
+            }
+        }
+        return ans;
+    }
+
+    int dfs(int[][] a,int i,int j){
+        if(dp[i][j] != 0) return dp[i][j];
+
+        int best = 1;
+        for(int[] d:dir){
+            int x=i+d[0], y=j+d[1];
+            if(x>=0 && y>=0 && x<n && y<m && a[x][y] > a[i][j]){
+                best = Math.max(best, 1+dfs(a,x,y));
+            }
+        }
+        return dp[i][j] = best;
+    }
+}
